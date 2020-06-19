@@ -17,7 +17,9 @@ const Item = ({ tree }: { tree: SynSet }) => {
 			<li>
 				{tree.name} ({tree.size}){" "}
 				{tree.children!.length > 0 && (
-					<span onClick={expanded ? collapse : expand}>{expanded ? "-" : "+"}</span>
+					<span className="expander" onClick={expanded ? collapse : expand}>
+						{expanded ? "-" : "+"}
+					</span>
 				)}
 			</li>
 			{tree.children!.length > 0 && expanded && (

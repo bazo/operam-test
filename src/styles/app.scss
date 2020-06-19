@@ -3,3 +3,11 @@
 ul {
 	list-style-type: none;
 }
+
+.expander {
+	cursor: pointer;
+
+	&:hover {
+		font-weight: bold;
+	}
+}

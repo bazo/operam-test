@@ -1,9 +1,13 @@
 import { Message } from "../types";
-import { uploadToDB, clearDB } from "../app/db";
+import { uploadToDB, clearDB, downloadData } from "../app/db";
 
 const post = (message: Message<{}>) => {
 	//@ts-ignore
 	postMessage(message);
+};
+
+const progressCallback = (complete: number) => {
+	post({ type: "progress", data: complete });
 };
 
 // @ts-ignore
@@ -17,20 +21,14 @@ onmessage = async (env: MessageEvent) => {
 	}
 
 	if (action === "upload") {
-		await uploadToDB(data, limit, complete => {
-			post({ type: "progress", data: complete });
-		});
+		await uploadToDB(data, limit, progressCallback);
 		post({ type: "finished" });
 	}
 
 	if (action === "download") {
-		/*
-		const res = await downloadData();
-
-		console.log(res);
+		const res = await downloadData(5000, progressCallback);
 
 		//@ts-ignore
 		postMessage({ type: "download", data: res });
-		*/
 	}
 };

@@ -5,12 +5,12 @@ import ProgressBar from "../components/progressBar";
 // @ts-ignore
 import XMLWorker from "../workers/xml.worker.ts";
 // @ts-ignore
-import DBWorker from "../workers/upload.worker.ts";
+import DBWorker from "../workers/db.worker.ts";
 import { Data, Message, SynSet } from "../types";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { createTree } from "../helpers/helpers";
-import { downloadData, getTotalCount } from "./db";
+import { downloadData } from "./db";
 import Tree from "../components/tree";
 
 const useTestData = false;
@@ -89,28 +89,9 @@ const App = () => {
 			return testData;
 		}
 
-		const totalCount = await getTotalCount();
-		return downloadData(totalCount, 5000, (complete: number) => {
+		return downloadData(5000, (complete: number) => {
 			progress$.next(complete);
 		});
-
-		/* 
-		TOO BIG :(
-		let data = (localStorage.getItem("data") as unknown) as Data;
-
-		if (data === null) {
-			
-			const totalCount = await getTotalCount();
-			data = await downloadData(totalCount, 5000, (complete: number) => {
-				progress$.next(complete);
-			});
-
-			localStorage.setItem("data", JSON.stringify(data));
-			return data;
-		} else {
-			return JSON.parse((data as unknown) as string);
-		}
-		*/
 	};
 
 	useEffect(() => {

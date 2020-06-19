@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SynSet } from "../types";
 
-const Item = ({ tree }: { tree: SynSet }) => {
+const Tree = ({ tree }: { tree: SynSet }) => {
 	const [expanded, setExpanded] = useState(false);
 
 	const expand = () => {
@@ -26,18 +26,13 @@ const Item = ({ tree }: { tree: SynSet }) => {
 				<li>
 					<ul>
 						{tree.children?.map(child => {
-							return <Item tree={child} key={child.name} />;
+							return <Tree tree={child} key={child.name} />;
 						})}
 					</ul>
 				</li>
 			)}
 		</ul>
 	);
-};
-
-const Tree = ({ tree }: { tree: SynSet }) => {
-	console.log(tree);
-	return <Item tree={tree} />;
 };
 
 export default Tree;

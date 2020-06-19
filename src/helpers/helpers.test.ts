@@ -31,7 +31,7 @@ test.each([
 });
 
 const paths = [
-	{ name: "1", size: 3 },
+	{ name: "1", size: 15 },
 	{ name: "1 > 2", size: 2 },
 	{ name: "1 > 2 > 3", size: 1 },
 	{ name: "1 > 2 > 3 > 4", size: 0 },
@@ -49,7 +49,7 @@ const paths = [
 ];
 
 const tree: SynSet = {
-	name: "root",
+	name: "1",
 	size: 15,
 	children: [
 		{
@@ -67,6 +67,7 @@ const tree: SynSet = {
 								{
 									name: "4",
 									size: 0,
+									children: [],
 								},
 							],
 						},
@@ -85,14 +86,17 @@ const tree: SynSet = {
 						{
 							name: "1",
 							size: 0,
+							children: [],
 						},
 						{
 							name: "2",
 							size: 0,
+							children: [],
 						},
 						{
 							name: "3",
 							size: 0,
+							children: [],
 						},
 					],
 				},
@@ -103,16 +107,19 @@ const tree: SynSet = {
 						{
 							name: "1",
 							size: 0,
+							children: [],
 						},
 						{
 							name: "2",
 							size: 0,
+							children: [],
 						},
 					],
 				},
 				{
 					name: "3",
 					size: 0,
+					children: [],
 				},
 			],
 		},
@@ -123,6 +130,7 @@ const tree: SynSet = {
 				{
 					name: "1",
 					size: 0,
+					children: [],
 				},
 			],
 		},
@@ -130,5 +138,7 @@ const tree: SynSet = {
 };
 
 test("create tree", () => {
-	expect(createTree(paths)).toStrictEqual(tree);
+	console.log(tree);
+
+	expect(createTree(paths)).toEqual(tree);
 });

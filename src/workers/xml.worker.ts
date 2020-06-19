@@ -52,17 +52,18 @@ async function downloadXML(): Promise<string> {
 function parseSet(set: txml.INode, data: any[], counts: Counts, level: number, path: string, idPath: string[]) {
 	const keys = createKeys(idPath);
 
-	//if ((set.children as txml.INode[]).length === 0) {
-	keys.forEach(key => {
-		if (!counts.hasOwnProperty(key)) {
-			counts[key] = 0;
-		}
+	// no idea how they count the sets, but this seems logical to me
+	if ((set.children as txml.INode[]).length === 0) {
+		keys.forEach(key => {
+			if (!counts.hasOwnProperty(key)) {
+				counts[key] = 0;
+			}
 
-		const currentCount = counts[key];
+			const currentCount = counts[key];
 
-		counts[key] = currentCount + 1;
-	});
-	//}
+			counts[key] = currentCount + 1;
+		});
+	}
 
 	idPath = [...idPath, set.attributes["wnid"] as string];
 

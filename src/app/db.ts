@@ -28,7 +28,8 @@ export async function getTotalCount(): Promise<number> {
 	return db.query(q.Count(q.Match(q.Index(INDEX_NAME))));
 }
 
-export async function downloadData(totalCount: number, size: number = 100, progressCallback: ProgressCallback) {
+export async function downloadData(size: number = 5000, progressCallback: ProgressCallback) {
+	const totalCount = await getTotalCount();
 	let after = undefined;
 
 	let data: any[] = [];
